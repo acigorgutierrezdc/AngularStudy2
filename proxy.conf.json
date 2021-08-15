@@ -1,0 +1,10 @@
+{
+    "/api": {
+      "target": "https://localhost:44394/api/Aluno",
+      "secure": true,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": ""
+      }
+    }
+  }
