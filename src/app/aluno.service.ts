@@ -11,7 +11,7 @@ var httpOptions = {headers: new HttpHeaders({"Content-Type": "application/json"}
 })
 export class AlunoService {
 
-  url = 'https://localhost:44354/api/alunos';  
+  url = 'https://localhost:44394/api/Aluno';  
 
   constructor(private http: HttpClient) { }
 
