@@ -1,4 +1,3 @@
-
 export class Aluno {
     alunoId: string;
     nome: string;

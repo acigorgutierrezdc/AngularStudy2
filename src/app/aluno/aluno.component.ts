@@ -3,18 +3,22 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';  
 import { AlunoService } from '../aluno.service';  
 import { Aluno } from '../aluno';  
+
 @Component({
   selector: 'app-aluno',
   templateUrl: './aluno.component.html',
   styleUrls: ['./aluno.component.css']
 })
 export class AlunoComponent implements OnInit {
+
   dataSaved = false;  
   alunoForm: any;  
   allAlunos: Observable<Aluno[]>;  
   alunoIdUpdate = null;  
   message = null;  
+
   constructor(private formbulider: FormBuilder, private alunoService:AlunoService) { }
+
   ngOnInit() {
     this.alunoForm = this.formbulider.group({  
       Nome: ['', [Validators.required]],  
@@ -22,15 +26,18 @@ export class AlunoComponent implements OnInit {
     });  
     this.loadAllAlunos();  
   }
+
   loadAllAlunos() {  
     this.allAlunos = this.alunoService.getAllAlunos();  
   } 
+
   onFormSubmit() {  
     this.dataSaved = false;  
     const aluno = this.alunoForm.value;  
     this.CreateAluno(aluno);  
     this.alunoForm.reset();  
   } 
+
   CreateAluno(aluno: Aluno) {  
     if (this.alunoIdUpdate == null) {  
       this.alunoService.createAluno(aluno).subscribe(  
@@ -52,7 +59,8 @@ export class AlunoComponent implements OnInit {
         this.alunoForm.reset();  
       });  
     }  
-  }  
+  }
+  
   loadAlunoToEdit(alunoid: string) {  
     this.alunoService.getAlunoById(alunoid).subscribe(aluno=> {  
       this.message = null;  
@@ -62,6 +70,7 @@ export class AlunoComponent implements OnInit {
       this.alunoForm.controls['Email'].setValue(aluno.email);  
     });    
   }  
+
   deleteAluno(alunoid: string) {  
     if (confirm("Deseja realmente deletar este aluno ?")) {   
       this.alunoService.deleteAlunoById(alunoid).subscribe(() => {  
@@ -73,9 +82,11 @@ export class AlunoComponent implements OnInit {
       });  
     }  
   }  
+
   resetForm() {  
     this.alunoForm.reset();  
     this.message = null;  
     this.dataSaved = false;  
   } 
+
 }
